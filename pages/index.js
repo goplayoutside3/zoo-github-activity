@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import Commits from '../components/Commits'
 import PullRequests from '../components/PullRequests'
 import Comments from '../components/Comments'
+import CustomHeader from '../components/CustomHeader'
+import { Box, Heading, Text } from 'grommet'
+import { ZooFooter } from '@zooniverse/react-components'
+import styled from 'styled-components'
 
 const types = {
   COMMIT: 'PushEvent',
@@ -12,6 +16,11 @@ const types = {
   PR_COMMENT: 'PullRequestReviewCommentEvent',
   COMMIT_COMMENT: 'CommitCommentEvent',
 }
+
+const StyledBox = styled(Box)`
+  min-height: 50vh;
+  padding: 50px;
+`
 
 const Home = () => {
   const [commitData, setCommitData] = useState([])
@@ -31,10 +40,12 @@ const Home = () => {
       let pullRequests = []
       let comments = []
 
-      const mostDistantDate = new Date(fetchedData[fetchedData.length - 1].created_at)
+      const mostDistantDate = new Date(
+        fetchedData[fetchedData.length - 1].created_at
+      )
       const timeDifference = Date.now() - mostDistantDate.getTime()
       const hrFactor = 1000 * 60 * 60
-      setHoursElapsed(Math.round(timeDifference/hrFactor))
+      setHoursElapsed(Math.round(timeDifference / hrFactor))
 
       fetchedData.forEach(item => {
         if (item.type === types.COMMIT) commits.push(item)
@@ -56,19 +67,25 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>Zooniverse Github Activity</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        Zooniverse is open-source! There were 100 github events in the past {hoursElapsed} hours including:
+      <CustomHeader />
+
+      <StyledBox as='main'>
+        <Heading>Zooniverse is open-source!</Heading>
+        <Text size='large'>
+          In the past {hoursElapsed} hours there were 100 events on github including:
+        </Text>
         <Commits data={commitData} />
         <PullRequests data={pullRequestData} />
         <Comments data={commentData} />
-      </main>
-    </div>
+      </StyledBox>
+      <ZooFooter />
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Box } from 'grommet'
+import { Box, Text } from 'grommet'
 import { useEffect, useState } from 'react'
 
 const PullRequests = ({ data }) => {
@@ -21,8 +21,8 @@ const PullRequests = ({ data }) => {
 
   return (
     <Box>
-      <Box>{openedRequests} opened pull requests. </Box>
-      <Box>{closedRequests} closed pull requests. </Box>
+      <Text>{openedRequests} opened pull requests. </Text>
+      <Text>{closedRequests} closed pull requests. </Text>
     </Box>
   )
 }

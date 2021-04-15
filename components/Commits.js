@@ -1,4 +1,4 @@
-import { Box } from 'grommet'
+import { Box, Text } from 'grommet'
 import { useEffect, useState } from 'react'
 
 const Commits = ({ data }) => {
@@ -11,11 +11,15 @@ const Commits = ({ data }) => {
     data.forEach(item => {
       newNumCommits += item.payload.size
     })
-    
+
     setNumCommits(newNumCommits)
   }, [data])
 
-  return <Box>{numCommits} commits.</Box>
+  return (
+    <Box>
+      <Text>{numCommits} commits.</Text>
+    </Box>
+  )
 }
 
 export default Commits
