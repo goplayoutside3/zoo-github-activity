@@ -5,7 +5,7 @@ import Commits from '../components/Commits'
 import PullRequests from '../components/PullRequests'
 import Comments from '../components/Comments'
 import CustomHeader from '../components/CustomHeader'
-import { Box, Heading, Text } from 'grommet'
+import { Anchor, Box, Heading, Text } from 'grommet'
 import { ZooFooter } from '@zooniverse/react-components'
 import styled from 'styled-components'
 
@@ -87,18 +87,27 @@ const Home = () => {
       <CustomHeader />
 
       <StyledBox as='main'>
-        <Heading margin={{ top: 'none', bottom: '1rem' }}>Zooniverse is open-source!</Heading>
+        <Heading margin={{ top: 'none', bottom: '1rem' }}>
+          Zooniverse is open-source!
+        </Heading>
         <Box margin={{ bottom: '1rem' }}>
           <Text size='large'>We have {numRepos} codebase repositories.</Text>
         </Box>
-        <Text size='large'>
-          In the past {hoursElapsed} hours there were 100 events on github
-          including:
-        </Text>
+        <Box>
+          <Text size='large'>
+            In the past {hoursElapsed} hours there were 100 events on github
+            including:
+          </Text>
+        </Box>
         <Box as='ul'>
           <Commits data={commitData} />
           <PullRequests data={pullRequestData} />
           <Comments data={commentData} />
+        </Box>
+        <Box>
+          <Text size='1rem'>
+            Find us on <Anchor href="https://github.com/zooniverse" target="_blank">Github</Anchor>.
+          </Text>
         </Box>
       </StyledBox>
       <ZooFooter />
