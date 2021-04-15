@@ -1,6 +1,13 @@
 import Head from 'next/head'
+import { fetchActivity } from './api/activity'
+import { useEffect } from 'react'
 
-export default function Home() {
+const Home = () => {
+  useEffect(async () => {
+    const data = await fetchActivity()
+    console.log(data)
+  })
+  
   return (
     <div>
       <Head>
@@ -14,3 +21,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home
