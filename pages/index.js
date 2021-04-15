@@ -17,6 +17,7 @@ const Home = () => {
   const [commitData, setCommitData] = useState([])
   const [pullRequestData, setPullRequestData] = useState([])
   const [commentData, setCommentData] = useState([])
+  const [hoursElapsed, setHoursElapsed] = useState(0)
 
   useEffect(() => {
     fetchRecentData()
@@ -29,6 +30,11 @@ const Home = () => {
       let commits = []
       let pullRequests = []
       let comments = []
+
+      const mostDistantDate = new Date(fetchedData[fetchedData.length - 1].created_at)
+      const timeDifference = Date.now() - mostDistantDate.getTime()
+      const hrFactor = 1000 * 60 * 60
+      setHoursElapsed(Math.round(timeDifference/hrFactor))
 
       fetchedData.forEach(item => {
         if (item.type === types.COMMIT) commits.push(item)
@@ -57,7 +63,7 @@ const Home = () => {
       </Head>
 
       <main>
-        Zooniverse is open-source! There were 100 github events from (Date - Date) including:
+        Zooniverse is open-source! There were 100 github events in the past {hoursElapsed} hours including:
         <Commits data={commitData} />
         <PullRequests data={pullRequestData} />
         <Comments data={commentData} />

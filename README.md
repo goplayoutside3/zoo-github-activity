@@ -19,3 +19,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## See It Live
 
+Deployed here: [github-widget.vercel.app](https://github-widget.vercel.app/)
