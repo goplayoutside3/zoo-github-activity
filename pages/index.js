@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { fetchActivity } from './api/activity'
+import { fetchActivity, fetchNumberRepos } from './api/activity'
 import { useEffect, useState } from 'react'
 import Commits from '../components/Commits'
 import PullRequests from '../components/PullRequests'
@@ -27,9 +27,11 @@ const Home = () => {
   const [pullRequestData, setPullRequestData] = useState([])
   const [commentData, setCommentData] = useState([])
   const [hoursElapsed, setHoursElapsed] = useState(0)
+  const [numRepos, setNumRepos] = useState(0)
 
   useEffect(() => {
     fetchRecentData()
+    fetchRepositories()
   }, [])
 
   const fetchRecentData = async () => {
@@ -66,6 +68,15 @@ const Home = () => {
     }
   }
 
+  const fetchRepositories = async () => {
+    try {
+      const response = await fetchNumberRepos()
+      setNumRepos(response.public_repos)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -76,7 +87,10 @@ const Home = () => {
       <CustomHeader />
 
       <StyledBox as='main'>
-        <Heading>Zooniverse is open-source!</Heading>
+        <Heading margin={{ top: 'none', bottom: '1rem' }}>Zooniverse is open-source!</Heading>
+        <Box margin={{ bottom: '1rem' }}>
+          <Text size='large'>We have {numRepos} codebase repositories.</Text>
+        </Box>
         <Text size='large'>
           In the past {hoursElapsed} hours there were 100 events on github
           including:
