@@ -78,11 +78,14 @@ const Home = () => {
       <StyledBox as='main'>
         <Heading>Zooniverse is open-source!</Heading>
         <Text size='large'>
-          In the past {hoursElapsed} hours there were 100 events on github including:
+          In the past {hoursElapsed} hours there were 100 events on github
+          including:
         </Text>
-        <Commits data={commitData} />
-        <PullRequests data={pullRequestData} />
-        <Comments data={commentData} />
+        <Box as='ul'>
+          <Commits data={commitData} />
+          <PullRequests data={pullRequestData} />
+          <Comments data={commentData} />
+        </Box>
       </StyledBox>
       <ZooFooter />
     </>

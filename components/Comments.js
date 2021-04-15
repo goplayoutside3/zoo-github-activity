@@ -1,9 +1,10 @@
 import { Box, Text } from 'grommet'
+import ListItem from './ListItem'
 
 const Comments = ({ data }) => {
   return (
     <Box>
-      <Text>{data.length} comments. </Text>
+      <ListItem num={data.length} text='comments' />
     </Box>
   )
 }

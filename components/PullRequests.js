@@ -1,5 +1,6 @@
 import { Box, Text } from 'grommet'
 import { useEffect, useState } from 'react'
+import ListItem from './ListItem'
 
 const PullRequests = ({ data }) => {
   const [openedRequests, setOpenedRequests] = useState(0)
@@ -21,8 +22,8 @@ const PullRequests = ({ data }) => {
 
   return (
     <Box>
-      <Text>{openedRequests} opened pull requests. </Text>
-      <Text>{closedRequests} closed pull requests. </Text>
+      <ListItem num={openedRequests} text='opened pull requests' />
+      <ListItem num={closedRequests} text='closed pull requests' />
     </Box>
   )
 }

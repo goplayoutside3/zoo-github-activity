@@ -1,5 +1,6 @@
 import { Box, Text } from 'grommet'
 import { useEffect, useState } from 'react'
+import ListItem from './ListItem'
 
 const Commits = ({ data }) => {
   const [numCommits, setNumCommits] = useState(0)
@@ -17,7 +18,7 @@ const Commits = ({ data }) => {
 
   return (
     <Box>
-      <Text>{numCommits} commits.</Text>
+      <ListItem num={numCommits} text={'commits'} />
     </Box>
   )
 }
